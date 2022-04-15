@@ -1,4 +1,4 @@
-// Updated 09-Feb-22
+// Updated 14-Apr-22
 
 const fiatSymbols = [
   'USD/SDR',
@@ -33,16 +33,10 @@ module.exports = {
     channel: '#bot-test',
     url: '',
   },
-  lunaProvider: {
-    adjustTvwapSymbols: ['LUNA/USDT'],
-    huobi: { symbols: ['LUNA/USDT'] },
-    binance: { symbols: ['LUNA/USDT'] },
-    kucoin: { symbols: ['LUNA/USDT'] },
-  },
-  cryptoProvider: {
-    adjustTvwapSymbols: ['USDT/USD'],
-    bitfinex: { symbols: ['USDT/USD'] },
-    kraken: { symbols: ['USDT/USD'] },
+  onChainProvider: {
+    lcdUrl: 'https://lcd.terra.dev',
+    chainId: 'columbus-5',
+    chainlink: { symbols: ['LUNA/USD'] },
   },
   fiatProvider: {
     fallbackPriority: ['currencylayer', 'alphavantage', 'fixer', 'exchangerate', 'bandprotocol'],

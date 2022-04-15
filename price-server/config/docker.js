@@ -8,6 +8,13 @@ module.exports = {
     channel: process.env.SLACK_CHANNEL || '',
     url: process.env.SLACK_URL || '',
   },
+  onChainProvider: {
+    lcdUrl: process.env.ONCHAIN_PROVIDER_LCD_URL || 'https://lcd.terra.dev',
+    chainId: process.env.ONCHAIN_PROVIDER_CHAIN_ID || 'columbus-5',
+    chainlink: process.env.ONCHAIN_PROVIDER_CHAINLINK_SYMBOLS && {
+      symbols: process.env.ONCHAIN_PROVIDER_CHAINLINK_SYMBOLS.split(',') || [],
+    },
+  },
   lunaProvider: {
     adjustTvwapSymbols: process.env.LUNA_PROVIDER_ADJUST_TVWAP_SYMBOLS.split(',') || [],
     bithumb: process.env.LUNA_PROVIDER_BITHUMB_SYMBOLS && {

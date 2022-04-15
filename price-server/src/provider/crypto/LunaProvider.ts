@@ -6,7 +6,7 @@ class LunaProvider extends Provider {
   constructor(options: ProviderOptions) {
     super(options)
 
-    const { bithumb, coinone, huobi, binance, kucoin } = config.lunaProvider
+    const { bithumb, coinone, huobi, binance, kucoin } = config.lunaProvider ?? {}
 
     bithumb && this.quoters.push(new Bithumb(bithumb))
     coinone && this.quoters.push(new Coinone(coinone))

@@ -1,6 +1,6 @@
 import { getBaseCurrency, getQuoteCurrency } from 'lib/currency'
 import { PriceBySymbol } from 'provider/base'
-import { lunaProvider, fiatProvider, cryptoProvider } from 'provider'
+import { lunaProvider, fiatProvider, cryptoProvider, onChainProvider } from 'provider'
 
 export function getLunaPrices(): PriceBySymbol {
   const helpers: PriceBySymbol = {
@@ -9,7 +9,8 @@ export function getLunaPrices(): PriceBySymbol {
   const prices = lunaProvider.getPrices()
 
   // make 'LUNA/USD' rate
-  if (prices['LUNA/USDT'] && helpers['USDT/USD']) {
+  prices['LUNA/USD'] = onChainProvider.getPriceBy('LUNA/USD') // prioritize on-chain price
+  if (!prices['LUNA/USD'] && prices['LUNA/USDT'] && helpers['USDT/USD']) {
     // LUNA/USD = LUNA/USDT * USDT/USD
     prices['LUNA/USD'] = prices['LUNA/USDT'].multipliedBy(helpers['USDT/USD'])
   }
@@ -18,7 +19,8 @@ export function getLunaPrices(): PriceBySymbol {
   if (prices['LUNA/USD']) {
     Object.keys(fiatProvider.getPrices()).map((symbol) => {
       const targetSymbol = `LUNA/${getQuoteCurrency(symbol)}`
-      const usdFiat = fiatProvider.getPriceBy(symbol)
+      // prioritize on-chain price
+      const usdFiat = onChainProvider.getPriceBy(symbol) ?? fiatProvider.getPriceBy(symbol)
 
       // LUNA/FIAT = LUNA/USD * USD/FIAT
       prices[targetSymbol] = prices['LUNA/USD'].multipliedBy(usdFiat)

@@ -6,7 +6,7 @@ class CryptoProvider extends Provider {
   constructor(options: ProviderOptions) {
     super(options)
 
-    const { upbit, bithumb, binance, huobi, bitfinex, kraken, kucoin } = config.cryptoProvider
+    const { upbit, bithumb, binance, huobi, bitfinex, kraken, kucoin } = config.cryptoProvider ?? {}
 
     upbit && this.quoters.push(new Upbit(upbit))
     bithumb && this.quoters.push(new Bithumb(bithumb))
