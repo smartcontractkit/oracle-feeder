@@ -41,6 +41,11 @@ export class Quoter {
     return
   }
 
+  public async terminate(): Promise<void> {
+    // NOP - no long lived connection
+    return
+  }
+
   public async tick(now: number): Promise<boolean> {
     if (now - this.tickedAt < this.options.interval) {
       return false

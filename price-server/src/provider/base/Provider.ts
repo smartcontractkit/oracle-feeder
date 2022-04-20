@@ -38,6 +38,14 @@ export class Provider {
     logger.info(`initialized ${this.constructor.name}: ${quoters}`)
   }
 
+  public async terminate(): Promise<void> {
+    for (const quoter of this.quoters) {
+      await quoter.terminate()
+    }
+    const quoters = this.quoters.map((quoter) => quoter.constructor.name).join(', ')
+    logger.info(`terminated ${this.constructor.name}: ${quoters}`)
+  }
+
   public async tick(now: number): Promise<boolean> {
     const responses = await Promise.all(this.quoters.map((quoter) => quoter.tick(now)))
     let isUpdated = false

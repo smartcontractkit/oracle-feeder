@@ -32,6 +32,10 @@ export class WebSocketQuoter extends Quoter {
     this.ws && this.ws.terminate()
   }
 
+  public async terminate(): Promise<void> {
+    this.disconnect()
+  }
+
   public async tick(now: number): Promise<boolean> {
     // ping every 10 seconds
     if (this.ws && this.ws.readyState === this.ws.OPEN && now - this.sendedPingAt > 10000) {

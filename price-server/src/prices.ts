@@ -9,7 +9,8 @@ export function getLunaPrices(): PriceBySymbol {
   const prices = lunaProvider.getPrices()
 
   // make 'LUNA/USD' rate
-  prices['LUNA/USD'] = onChainProvider.getPriceBy('LUNA/USD') // prioritize on-chain price
+  const lunaUSD = onChainProvider.getPriceBy('LUNA/USD')
+  if (lunaUSD) prices['LUNA/USD'] = lunaUSD // prioritize on-chain price
   if (!prices['LUNA/USD'] && prices['LUNA/USDT'] && helpers['USDT/USD']) {
     // LUNA/USD = LUNA/USDT * USDT/USD
     prices['LUNA/USD'] = prices['LUNA/USDT'].multipliedBy(helpers['USDT/USD'])

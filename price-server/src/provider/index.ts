@@ -21,6 +21,12 @@ export async function initialize(): Promise<void> {
   }
 }
 
+export async function terminate(): Promise<void> {
+  for (const provider of providers) {
+    await provider.terminate()
+  }
+}
+
 export async function tick(now: number): Promise<void> {
   await bluebird.mapSeries(providers, (provider) => provider.tick(now)).catch(errorHandler)
 
