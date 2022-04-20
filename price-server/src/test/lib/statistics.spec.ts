@@ -1,5 +1,5 @@
-import { average, vwap } from './statistics'
-import { num } from './num'
+import { average, vwap } from '../../lib/statistics'
+import { num } from '../../lib/num'
 
 describe('average', () => {
   test('should return average price', () => {

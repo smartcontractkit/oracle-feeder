@@ -1,0 +1,78 @@
+import * as nock from 'nock'
+
+export const setupExchangeRateMocks = () => {
+  nock('https://api.exchangerate.host:443', { encodedQueryParams: true })
+    .get('/latest')
+    .query({
+      base: 'USD',
+      symbols:
+        'XDR%2CKRW%2CMNT%2CEUR%2CCNY%2CJPY%2CGBP%2CINR%2CCAD%2CCHF%2CHKD%2CAUD%2CSGD%2CTHB%2CSEK%2CDKK%2CIDR%2CPHP%2CMYR%2CNOK%2CTWD',
+    })
+    .reply(
+      200,
+      [
+        '1f8b08000000000000034c90cb6edb3010',
+        '457f85b8dd32b4f8102972975869ec0a710d3f1078a948acadc6960c914a1a04f9f782e9a6abc1997b3003dc0f5c86d8c27de0128e7058fe22efc34486318d9134c3e55af7ef640a9ec45317c8751c7efb2626e1dcbd78f276aa2379f3a41dbafe48c9f5ecebe04933f4a16bfd489eebe6a5eb8f640a240cc96bea3ea5b1eb274f2e75d7c7baeb9351f72df1afc3f935c1ffaf1828a6f10c87538cd7e06633ffa739d5fdd18f75f4ec348438fb366b87be8e1e9f14616a1a1f025c1c274ff15c070f87fdb604459b1c0791097193a91b9181225d09a980db7d09c799545a669a627efb85223785c929e68bef7019b339e705c57c7580d34c5a916582a2acaa8485e1c24a8afbfde6cb154a6949f170b74e68b4118a62519570861552cb84cb7203c7959439cb2cd79c532c571b38a39994dce696e2c7fa00c745c194caad1114d5e6292d24675a0b6905c5e36a072733ce99b4462b49f178d8c02926b4c9784eb1fa59c115cc589d2b43b15eace172c1a4e63ac5dbfb0ace326545610cc5f6e15f153a2fb4a6d82deee0a464c62ac90dc5eea98413960921ccdf995ae82845b880fd6b6e646a6c68595b0b0007d9e90f54020000',
+      ],
+      [
+        'Date',
+        'Wed, 20 Apr 2022 05:49:05 GMT',
+        'Content-Type',
+        'application/json; charset=utf-8',
+        'Transfer-Encoding',
+        'chunked',
+        'Connection',
+        'close',
+        'X-DNS-Prefetch-Control',
+        'off',
+        'X-Frame-Options',
+        'SAMEORIGIN',
+        'Strict-Transport-Security',
+        'max-age=15552000; includeSubDomains',
+        'X-Download-Options',
+        'noopen',
+        'X-Content-Type-Options',
+        'nosniff',
+        'X-XSS-Protection',
+        '1; mode=block',
+        'X-RateLimit-Limit',
+        '2000',
+        'X-RateLimit-Remaining',
+        '1999',
+        'Access-Control-Allow-Origin',
+        '*',
+        'Access-Control-Allow-Methods',
+        'GET',
+        'Access-Control-Allow-Credentials',
+        'false',
+        'Access-Control-Allow-Headers',
+        'Origin, X-Requested-With, Content-Type, Accept, Methods',
+        'X-Forwarded-For',
+        'api.exchangerate.host',
+        'Cache-Control',
+        'max-age=31536000',
+        'ETag',
+        'W/"254-sJMUt5H6AfglVekhQ7JVSSJRwE0"',
+        'Vary',
+        'Accept-Encoding',
+        'CF-Cache-Status',
+        'HIT',
+        'Age',
+        '865',
+        'Expect-CT',
+        'max-age=604800, report-uri="https://report-uri.cloudflare.com/cdn-cgi/beacon/expect-ct"',
+        'Report-To',
+        '{"endpoints":[{"url":"https:\\/\\/a.nel.cloudflare.com\\/report\\/v3?s=Rv6AQC2M3GKzF9hxw5eLr64DfKXd77QPGb0Hcq%2FqTt6FhaGfgGgE1UYpjTOuDKj%2Beu3BfeSF50RahKZzcnNebz8Rm5x9wZqujib%2FbsPHbR6Gs3rddZnZtYK4bFfovg7diOKFjBFZiOA%3D"}],"group":"cf-nel","max_age":604800}',
+        'NEL',
+        '{"success_fraction":0,"report_to":"cf-nel","max_age":604800}',
+        'Server',
+        'cloudflare',
+        'CF-RAY',
+        '6feb983aa9857e76-LAX',
+        'Content-Encoding',
+        'gzip',
+        'alt-svc',
+        'h3=":443"; ma=86400, h3-29=":443"; ma=86400',
+      ]
+    )
+}
